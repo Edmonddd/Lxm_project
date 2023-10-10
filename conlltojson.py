@@ -322,6 +322,6 @@ def convert_to_json(conll_file_path, json_file_path):
 
 if __name__ == "__main__":
     # 使用示例
-    conll_file_path = 'input/ace04/ace04_train_attn_0.3_xlm-roberta-large-0.3-false-gauss-attention-dynamic-0.3-5-false-100-xlm-large-ace04-mixup-42-retrain-mixup-undeal.txt'
-    json_file_path = './res.json'
+    conll_file_path = 'M:\\llc\\数据记录\\ACLM\\untext\\ace04\\ace04-undeal.txt'
+    json_file_path = 'M:\\llc\\数据记录\\ACLM\\untext\\ace04\\ace04-undeal.json'
     convert_to_json(conll_file_path, json_file_path)
