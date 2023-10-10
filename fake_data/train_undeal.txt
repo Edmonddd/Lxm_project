@@ -1,0 +1,37 @@
+it	O
+'s	O
+a	O
+very	O
+important	O
+thing	O
+.	O
+
+and	O
+there	O
+'s	O
+a	O
+sense	O
+of	O
+relief	O
+.	O
+
+the	B-GPE
+Chinese	B-GPE-GPE
+government	B-GPE
+and	O
+the	B-GPE
+Australian	B-GPE-GPE
+government	B-GPE
+are	O
+in	O
+Melbourne	B-GPE
+.	O
+
+and	O
+it	O
+'s	O
+a	O
+very	O
+important	O
+thing	O
+.	O

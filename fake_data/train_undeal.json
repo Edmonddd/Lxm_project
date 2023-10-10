@@ -1,0 +1,147 @@
+[
+  {
+    "tokens": [
+      "it",
+      "'s",
+      "a",
+      "very",
+      "important",
+      "thing",
+      "."
+    ],
+    "entities": []
+  },
+  {
+    "tokens": [
+      "and",
+      "there",
+      "'s",
+      "a",
+      "sense",
+      "of",
+      "relief",
+      "."
+    ],
+    "entities": []
+  },
+  {
+    "tokens": [
+      "the",
+      "Chinese",
+      "government",
+      "and",
+      "the",
+      "Australian",
+      "government",
+      "are",
+      "in",
+      "Melbourne",
+      "."
+    ],
+    "entities": [
+      {
+        "type": "GPE",
+        "start": 2,
+        "end": 3
+      },
+      {
+        "type": "GPE",
+        "start": 6,
+        "end": 7
+      },
+      {
+        "type": "GPE",
+        "start": 9,
+        "end": 10
+      }
+    ]
+  },
+  {
+    "tokens": [
+      "and",
+      "it",
+      "'s",
+      "a",
+      "very",
+      "important",
+      "thing"
+    ],
+    "entities": []
+  },
+  {
+    "tokens": [
+      "Commodities",
+      "Inspection",
+      "Department",
+      "also",
+      "shortened",
+      "production",
+      "area",
+      "inspection",
+      ",",
+      "which",
+      "was",
+      "originally",
+      "scheduled",
+      "to",
+      "take",
+      "place",
+      "."
+    ],
+    "entities": [
+      {
+        "type": "ORG",
+        "start": 0,
+        "end": 3
+      },
+      {
+        "type": "FAC",
+        "start": 5,
+        "end": 7
+      }
+    ]
+  },
+  {
+    "tokens": [
+      "He",
+      "says",
+      "that",
+      "if",
+      "all",
+      "countries",
+      "can",
+      "unite",
+      "one",
+      ",",
+      "it",
+      "will",
+      "help",
+      "to",
+      "deal",
+      "with",
+      "the",
+      "problem",
+      "of",
+      "drug",
+      "trafficking",
+      "."
+    ],
+    "entities": [
+      {
+        "type": "PER",
+        "start": 0,
+        "end": 1
+      },
+      {
+        "type": "GPE",
+        "start": 4,
+        "end": 6
+      },
+      {
+        "type": "GPE",
+        "start": 8,
+        "end": 9
+      }
+    ]
+  }
+]

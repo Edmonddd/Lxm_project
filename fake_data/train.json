@@ -1,0 +1,33 @@
+[{"tokens": ["According", "to", "the", "agreement", ",", "this", "loan", "will", "be", "mainly", "used", "in", "infrastructure", "projects", "such", "as", "telecommunications", ",", "municipal", "water", "supplies", "and", "sewage", "treatments", ",", "etc", "."], 
+"entities": [], 
+"relations": [], 
+"orig_id": "chtb_277.eng", 
+"ltokens": ["Xinhua", "News", "Agency", ",", "Canberra", ",", "August", "31st", "The", "Chinese", "government", "and", "the", "Australian", "government", "signed", "an", "agreement", "today", ",", "wherein", "the", "Australian", "party", "would", "provide", "China", "with", "a", "preferential", "financial", "loan", "of", "150", "million", "Australian", "dollars", "."], 
+"rtokens": ["Lasting", "for", "two", "days", ",", "the", "'94", "Development", "Assistance", "Cooperation", "Annual", "Meeting", "between", "the", "Chinese", "government", "and", "the", "Australian", "government", "concluded", "today", "in", "Melbourne", ".", "The", "Chinese", "delegation", "with", "Yongtu", "Long", ",", "assistant", "minister", "of", "the", "Ministry", "of", "Foreign", "Economy", "and", "Trade", ",", "as", "the", "delegation", "leader", ",", "and", "the", "Australian", "delegation", "with", "Flad", ",", "director", "general", "of", "Australian", "International", "Development", "Bureau", "Assistance", "Department", "as", "the", "delegation", "leader", ",", "chaired", "the", "meeting", "."]},
+
+{"tokens": ["(", "End", ")"], 
+"entities": [], 
+"relations": [], 
+"orig_id": "chtb_024.eng", 
+"ltokens": ["Exports", "earned", "a", "foreign", "exchange", "of", "10.37", "million", "US", "dollars", ",", "which", "is", "more", "than", "4", "times", "that", "of", "the", "previous", "year", ".", "Economic", "and", "technology", "cooperation", "completed", "28.3", "million", "US", "dollars", ",", "which", "was", "1.5", "times", "that", "of", "the", "previous", "year", "."], 
+"rtokens": []},
+
+{"tokens": ["Lasting", "for", "two", "days", ",", "the", "'94", "Development", "Assistance", "Cooperation", "Annual", "Meeting", "between", "the", "Chinese", "government", "and", "the", "Australian", "government", "concluded", "today", "in", "Melbourne", "."], 
+"entities": [{"type": "GPE", "start": 13, "end": 16}, {"type": "GPE", "start": 14, "end": 15}, {"type": "GPE", "start": 17, "end": 20}, {"type": "GPE", "start": 18, "end": 19}, {"type": "GPE", "start": 23, "end": 24}], "relations": [], 
+"orig_id": "chtb_277.eng", 
+"ltokens": ["The", "Chinese", "government", "and", "the", "Australian", "government", "signed", "an", "agreement", "today", ",", "wherein", "the", "Australian", "party", "would", "provide", "China", "with", "a", "preferential", "financial", "loan", "of", "150", "million", "Australian", "dollars", ".", "According", "to", "the", "agreement", ",", "this", "loan", "will", "be", "mainly", "used", "in", "infrastructure", "projects", "such", "as", "telecommunications", ",", "municipal", "water", "supplies", "and", "sewage", "treatments", ",", "etc", "."], 
+"rtokens": ["The", "Chinese", "delegation", "with", "Yongtu", "Long", ",", "assistant", "minister", "of", "the", "Ministry", "of", "Foreign", "Economy", "and", "Trade", ",", "as", "the", "delegation", "leader", ",", "and", "the", "Australian", "delegation", "with", "Flad", ",", "director", "general", "of", "Australian", "International", "Development", "Bureau", "Assistance", "Department", "as", "the", "delegation", "leader", ",", "chaired", "the", "meeting", ".", "After", "the", "talks", "were", "over", ",", "the", "two", "parties", "signed", "the", "summary", "of", "the", "talks", "."]}
+,
+{"tokens": ["The", "Commodities", "Inspection", "Department", "has", "shortened", "production", "area", "inspection", "time", "from", "originally", "7", "-", "10", "days", "to", "1", "-", "3", "days", "."], 
+"entities": [{"type": "ORG", "start": 1, "end": 4}, {"type": "FAC", "start": 6, "end": 8}], 
+"relations": [], 
+"orig_id": "chtb_024.eng", 
+"ltokens": ["The", "speed", "of", "examining", "and", "approving", "the", "three-capital", "enterprises", "has", "been", "limited", "from", "originally", "about", "one", "month", "to", "within", "seven", "days", ".", "The", "Industry", "and", "Commerce", "Department", "of", "the", "League", "has", "begun", "to", "put", "into", "practice", "a", "working", "system", "of", "a", "one", "page", "form", ",", "one", "photograph", ",", "one", "identity", "card", ",", "and", "one", "day", "turnaround", "for", "business", "license", "applications", "for", "individuals", "and", "privately", "owned", "enterprises", "."], "rtokens": ["The", "United", "Inspection", "Department", "of", "Heishantou", "Port", "has", "shortened", "the", "procedures", "for", "leaving", "and", "entering", "the", "territory", "from", "originally", "2", "-", "3", "days", "to", "1", "day", ".", "Thus", "far", ",", "the", "thirteen", "banner", "cities", "of", "the", "Hulun", "Buir", "League", "have", "already", "been", "connected", "to", "the", "national", "direct", "dialing", "telephone", "network", ",", "and", "have", "become", "the", "largest", "local", "telephone", "network", "in", "China", "."]}
+,
+{"tokens": ["He", "also", "appealed", "for", "all", "countries", "to", "unite", "as", "one", "to", "deal", "with", "foreign", "debt", ",", "drug", "trafficking", "and", "violent", "activities", "."], 
+"entities": [{"type": "PER", "start": 0, "end": 1}, {"type": "GPE", "start": 4, "end": 6}, {"type": "GPE", "start": 9, "end": 10}], 
+"relations": [], 
+"orig_id": "chtb_171.eng", 
+"ltokens": ["Alberto", "Fujimori", ",", "president", "of", "Peru", "presided", "over", "the", "opening", "ceremony", ".", "President", "Fujimori", "appealed", "at", "the", "opening", "ceremony", "for", "the", "countries", "of", "the", "Andes", "to", "strive", "together", "to", "achieve", "local", "integration", ",", "in", "order", "to", "shake", "off", "the", "state", "of", "being", "undeveloped", "."], 
+"rtokens": ["This", "session", "of", "the", "Andes", "parliament", "meeting", "will", "last", "until", "the", "16th", "."]}
+]
