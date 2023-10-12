@@ -5,8 +5,8 @@ def dealOneLine(lines):
     json_data = json.loads(lines)
 
     #处理start:
-    json_data[0] = json_data[0].split(': ')[1] 
-    json_data[1] = json_data[1].split(': ')[1] 
+    json_data[0] = json_data[0].split(':  ')[1] 
+    json_data[1] = json_data[1].split(':  ')[1] 
 
     #将空格分开：
     json_data[0] = json_data[0].split(' ')
