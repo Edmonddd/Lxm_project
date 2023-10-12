@@ -335,6 +335,6 @@ def convert_to_json(conll_file_path, json_file_path):
 
 if __name__ == "__main__":
     # 使用示例
-    conll_file_path = './output/deleteO.conll'
-    json_file_path = './output/deleteO.json'
+    conll_file_path = './output/step_1/deleteO.conll'
+    json_file_path = './output/step_1/deleteO.json'
     convert_to_json(conll_file_path, json_file_path)
