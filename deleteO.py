@@ -2,8 +2,8 @@ import os
 from conlltojson import splitTokens
 
 sentence = []
-outputFile = './output/deleteO.conll'
-conll_file_path = './fake_data/train_undeal.conll'
+outputFile = './output/step_1/deleteO.conll'
+conll_file_path = './step_1/ace04-equal.conll'
 
 def writeToConll(output_text):
     with open(outputFile, 'w') as file:
