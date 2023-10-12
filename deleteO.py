@@ -43,12 +43,14 @@ def slove(lines):
 
 def main():
     global sentence
+    sentenceSum = 0
     deleteNumber = 0
 
     with open(conll_file_path, 'r') as file:
         lines = file.readlines()
         lines = splitTokens(lines)
         for line in lines:
+            sentenceSum += 1
             res = slove(line)
             deleteNumber += res
             if(res == 0):
@@ -56,7 +58,9 @@ def main():
     
     writeToConll(sentence)
     print("转化 写入文件完成\n")
-    print("全为O的句子一共有:",deleteNumber)
+    print("一共处理的句子有: ",sentenceSum)
+    print("全为O的句子一共有: ",deleteNumber)
+    print("剩余句子: ",sentenceSum-deleteNumber )
 
 if __name__ == "__main__":
     main()
