@@ -27,6 +27,7 @@ def refix(tokens,entities):
     flag = 0
     not_compare = 0
     for i,compare in enumerate(compare_map2):
+        compare = compare[1:]
         is_same_order = compare_string_arrays(tokens,compare)
 
         if(is_same_order):
