@@ -4,7 +4,7 @@ from conlltojson import splitTokens
 sentence = []
 
 #输出文件夹
-outputFile = './output/deleteO.conll'
+outputFile = './output/step_1/deleteO.conll'
 #输入文件夹ß
 conll_file_path = './step_1/ace04-equal.txt'
 
