@@ -4,6 +4,8 @@ import json
 # 定义全局变量
 sentences = []
 
+
+
 def extract_duplicates(lst):
     duplicates = []
     unique_elements = []
@@ -91,7 +93,6 @@ def have1type(entities):
     # entities_ret.append(word)
 
     return entities_ret
-
 
 
 def have2type(entities):
@@ -208,8 +209,6 @@ def splitTokens(lines):
     return sub_lists
     
 
-
-
 # 处理每一个entities
 def solveEntities(entities):
     entities_ret = []
@@ -228,13 +227,8 @@ def solveEntities(entities):
     return entities_ret
 
 
-
-
-
-
-
-
 def solveOneToken(lines):
+    test = 2
     sentence = []
     tokens = []
     # 先将整个记录下来
@@ -254,21 +248,56 @@ def solveOneToken(lines):
             tokens.append(parts[0])
             if(len(parts) ==2):
                 types = parts[1]
-                if(types[0] == 'B') :
-                    # 重新初始化entities
-                    entities = []
-                    entities.append([i,types])
-                elif (types[0] == 'I'):
-                    entities.append([i,types])
+                if(test == 1):
+                    if(types[0] != 'O') :
+                        entities.append([i,types])
+                    else:
+                        # 重新初始化entities
+                        entities = []
+                    # 判断 1.下个为O 2.最后一个I 
+                    if(i < len(lines)-1):
+                        if((types[0] !='O')  \
+                        and lines[i+1].split('\t')[1][0] == 'O'):
+                            entities_ret += solveEntities(entities)
+                    elif(i == len(lines)-1):
+                        if(types[0] != 'O'):
+                            entities_ret += solveEntities(entities)
 
-                # 判断 1.下个为O 2.最后一个I 
-                if(i < len(lines)-1):
-                    if((types[0] == 'I' or types[0] == 'B')  \
-                       and lines[i+1].split('\t')[1][0] == 'O'):
-                        entities_ret += solveEntities(entities)
-                elif(i == len(lines)-1):
-                    if(types[0] == 'I'):
-                        entities_ret += solveEntities(entities)
+                elif(test == 2):
+                    if(types[0] == 'B') :
+                        # 重新初始化entities
+                        entities = []
+                        entities.append([i,types])
+                    elif (types[0] == 'I'):
+                        entities.append([i,types])
+
+                    # 判断 1.下个为O 2.最后一个I 
+                    if(i < len(lines)-1):
+                        if((types[0] == 'I' or types[0] == 'B')  \
+                        and ((lines[i+1].split('\t')[1][0] == 'O')or (lines[i+1].split('\t')[1][0] == 'B'))):
+                            entities_ret += solveEntities(entities)
+                    elif(i == len(lines)-1):
+                        if(types[0] == 'I' or types[0] == 'B' ):
+                            entities_ret += solveEntities(entities)
+
+                else:
+                    if(types[0] == 'B') :
+                        # 重新初始化entities
+                        entities = []
+                        entities.append([i,types])
+                    elif (types[0] == 'I'):
+                        entities.append([i,types])
+
+                    # 判断 1.下个为O 2.最后一个I 
+                    if(i < len(lines)-1):
+                        if((types[0] == 'I' or types[0] == 'B')  \
+                        and lines[i+1].split('\t')[1][0] == 'O'):
+                            entities_ret += solveEntities(entities)
+                    elif(i == len(lines)-1):
+                        if(types[0] == 'I'):
+                            entities_ret += solveEntities(entities)
+
+            
                     
     word = {
         "tokens" : tokens,
@@ -278,13 +307,7 @@ def solveOneToken(lines):
 
     return 0
 
-
-
-
-
-
-
-
+# 读取conll文件 转化成一个句子 
 def read_conll_file(file_path):
     global sentences
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -298,15 +321,10 @@ def read_conll_file(file_path):
         # 分割多个token
         lines = splitTokens(lines)
         
-        # 处理每个token的
+        # 处理每个token的type
         for  line in lines:
             solveOneToken(line)
     return sentences
-
-
-
-
-
 
 
 def convert_to_json(conll_file_path, json_file_path):
@@ -315,13 +333,8 @@ def convert_to_json(conll_file_path, json_file_path):
         json.dump(sentences, file, ensure_ascii=False, indent=2)
 
 
-
-
-
-
-
 if __name__ == "__main__":
     # 使用示例
-    conll_file_path = 'M:\\llc\\数据记录\\ACLM\\untext\\ace04\\ace04-undeal.txt'
-    json_file_path = 'M:\\llc\\数据记录\\ACLM\\untext\\ace04\\ace04-undeal.json'
+    conll_file_path = './output/deleteO.conll'
+    json_file_path = './output/deleteO.json'
     convert_to_json(conll_file_path, json_file_path)
