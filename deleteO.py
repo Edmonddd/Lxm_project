@@ -2,6 +2,7 @@ import os
 from conlltojson import splitTokens
 
 sentence = []
+
 #输出文件夹
 outputFile = './output/deleteO.conll'
 #输入文件夹ß
