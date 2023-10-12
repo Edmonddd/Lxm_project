@@ -36,9 +36,13 @@ def refix(tokens,entities):
             print("原来的是",compare_map1[i])
             flag = i
             break
-        if(i==len(compare_berfor_tokens)):
-            not_compare = 1
-            print("匹配不上\n")
+        # if(i==len(compare_berfor_tokens)):
+            # not_compare = 1
+            # print("匹配不上\n")
+
+    if(is_same_order == False):
+        not_compare = 1
+        print("匹配不上\n")
 
     for i,compare in enumerate(compare_berfor_tokens):
         if(not_compare == 1):
@@ -53,20 +57,24 @@ def refix(tokens,entities):
             # print("原来的是",compare_map1[i])
             flag = i
             break
-    
+
+    if(is_same_order == False):
+        not_compare = 1
+        print("匹配不上\n")
+
     print("\n")
 
     if(not_compare != 1):
-                word = {
-        'tokens'    : tokens,
-        'entities'  : entities,
-        'relations' : [],
-        'orig_id'   : orig_id[flag],
-        'ltokens'   : ltokens[flag],
-        'rtokens'   : rtokens[flag]
-    }
+        word = {
+            'tokens'    : tokens,
+            'entities'  : entities,
+            'relations' : [],
+            'orig_id'   : orig_id[flag],
+            'ltokens'   : ltokens[flag],
+            'rtokens'   : rtokens[flag]
+        }
     else:
-        word = []
+        return ''
 
     return word
     
@@ -101,7 +109,11 @@ def convert(aug_json_havetype_file_path, aug_text_file, before_json_file_path, o
         tokens = i['tokens']
         entities = i['entities']
         print("number is ",number)
-        result.append(refix(tokens,entities))
+        if(number == 2500):
+            print("1")
+        resTemp = refix(tokens,entities)
+        if(resTemp != ''):
+            result.append(resTemp)
 
 
     with open(output_file_path, 'w', encoding='utf-8') as file:
