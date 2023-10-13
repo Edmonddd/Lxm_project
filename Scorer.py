@@ -1,5 +1,6 @@
 import random
 import json
+from tqdm import tqdm
 
 # 定义全局变量
 outputScoreFile_first = './output/first/scorereuslt.json'
@@ -66,7 +67,7 @@ def convertToJson(sorted_list,map_2):
         }
         returnJson.append(word)
         returnlines.append(map_2[item[0]])
-        print(item[0])
+        # print(item[0])
 
     return returnlines,returnJson
 
@@ -103,7 +104,7 @@ def create_score():
     with open(FilePath, 'r') as file:
         lines = file.readlines()
         lines = splitTokens(lines)
-        for i in lines:
+        for i in tqdm(lines):
             sentence = ''
             score = 0
             for j in i:
@@ -122,19 +123,22 @@ def create_score():
     lines,json = convertToJson(firstPart_filtered_list,map_2)
     writeToConll(outputFile_first,lines)
     writeToScoreJson(outputScoreFile_first,json)
+    print("frist part 一共有:",len(lines))
 
     #middle part
     lines,json = convertToJson(middlePart_filtered_list,map_2)
     writeToConll(outputFile_middle,lines)
     writeToScoreJson(outputScoreFile_middle,json)
+    print("middle part 一共有:",len(lines))
 
     #middle part
     lines,json = convertToJson(lsatPart_filtered_list,map_2)
     writeToConll(outputFile_last,lines)
     writeToScoreJson(outputScoreFile_last,json)
+    print("last part 一共有:",len(lines))
 
 
-    print("finish")
+    print("比分筛选finish")
     
 
 
