@@ -15,8 +15,8 @@ reaugTokens = []
 entities= []
 
 before_json_file_path = './json_file/ace2004_train_context.json'
-aug_json_file_path = './output/deleteO.json'
-output_file_path = './output/temp/before.json'
+aug_json_file_path = './output/step_1/equal_deleteO.json'
+output_file_path = './output/temp/aug.json'
 
 def writeToJson1(output_text):
     global recompare_berfor_tokens

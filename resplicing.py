@@ -127,11 +127,11 @@ def main():
     # before_json_file_path = './json_file/ace2004_train_context.json'
 
     # 假数据
-    aug_json_havetype_file_path = './fake_data/train_undeal.json'
-    aug_text_file = 'M:\\llc\\数据记录\\ACLM\\untext\\ace04\\ace04_train_attn_0.3_xlm-roberta-large-ace04-mixup-42-retrain-only-aug-1.txt'
-    before_json_file_path = './fake_data/train.json'
+    aug_json_havetype_file_path = './output/step_1/equal_deleteO.json'
+    aug_text_file = './aug_file/all_sentences.txt'
+    before_json_file_path = './json_file/ace2004_train_context.json'
 
-    output_file_path = 'M:\\llc\\数据记录\\ACLM\\untext\\ace04\\output\\result.json'
+    output_file_path = './output/step_1/final_1.json'
 
     convert(aug_json_havetype_file_path, aug_text_file, before_json_file_path, output_file_path)
 
