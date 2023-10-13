@@ -8,8 +8,12 @@ from tqdm import tqdm
 
 returnJson = []
 # 定义全局变量
-outputFile = '/home/lxm/ACLM-main/step_3/scorereuslt.json'
+outputScoreFile = '/home/lxm/ACLM-main/step_3/scorereuslt.json'
+outputFile = './output/deleteOscorereuslt.conll'
 FilePath = '/home/lxm/ACLM-main/step_3/unequal_deleteO.conll'
+# score
+scoreMax = 8
+scoreMin = 4
 
 model_path = "/home/lxm/ACLM-main/xlm-roberta-large"
 max_len = 120
@@ -75,7 +79,19 @@ def bert_ppl_original(sent):
 
 
 def writeToConll(output_text):
-    with open(outputFile, 'w', encoding='utf-8') as file:
+    with open(outputFile, 'w') as file:
+    # 将字符串写入文件
+        # output_string = ''.join(output_text)
+        # file.write(output_string)
+        for row in output_text:
+            for i in row:
+                line = i
+                file.write(line)
+            file.write('\n')
+
+
+def writeToScoreJson(output_text):
+    with open(outputScoreFile, 'w', encoding='utf-8') as file:
         json.dump(returnJson, file, ensure_ascii=False, indent=2)
 
 
@@ -96,16 +112,23 @@ def splitTokens(lines):
     return sub_lists
     
 # 评分排序
-def sortScore(my_map):
+def sortScore(my_map,lines):
     global returnJson
-    sorted_list = sorted(my_map.items(), key=lambda x: x[1])
-    for item in sorted_list:
-        word = {
-            "sentence"  : item[0],
-            "score"     : item[1]
-        }
-        returnJson.append(word)
+    returnlines = []
+    sorted_list = sorted(my_map.items(), key=lambda x: x[1], reverse=True)
+
+    for number,item in enumerate(sorted_list):
+        # 加入得分筛选
+        if(item[1]>scoreMin and item[1]<scoreMax):
+            word = {
+                "sentence"  : item[0],
+                "score"     : item[1]
+            }
+            returnJson.append(word)
+            returnlines.append(lines[number])
         print(item[0])
+
+    return returnlines
 
 
 def create_score():
@@ -132,16 +155,14 @@ def create_score():
                 torch.cuda.empty_cache()
                 # print(torch.cuda.memory_summary())
                 # loadModel()
-            if(number%200==0):
-                print(1)
             print(number)
             setence_socre_ls.append(score)
             map[sentence] = score
 
-        sortScore(map)
+        lines = sortScore(map,lines)
 
-
-    writeToConll(returnJson)
+    writeToConll(lines)
+    writeToScoreJson(returnJson)
     print("finish")
 
 

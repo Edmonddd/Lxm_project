@@ -3,7 +3,8 @@ import json
 
 returnJson = []
 # 定义全局变量
-outputFile = './output/scorereuslt.json'
+outputScoreFile = './output/scorereuslt.json'
+outputFile = './output/deleteOscorereuslt.conll'
 FilePath = './output/deleteO.conll'
 
 # 随机得分，模拟 bert_ppl_original 函数
@@ -11,7 +12,18 @@ def random_score():
     return random.randint(0,10)
 
 def writeToConll(output_text):
-    with open(outputFile, 'w', encoding='utf-8') as file:
+    with open(outputFile, 'w') as file:
+    # 将字符串写入文件
+        # output_string = ''.join(output_text)
+        # file.write(output_string)
+        for row in output_text:
+            for i in row:
+                line = i
+                file.write(line)
+            file.write('\n')
+
+def writeToScoreJson(output_text):
+    with open(outputScoreFile, 'w', encoding='utf-8') as file:
         json.dump(returnJson, file, ensure_ascii=False, indent=2)
 
 
@@ -32,16 +44,23 @@ def splitTokens(lines):
     return sub_lists
     
 # 评分排序
-def sortScore(my_map):
+def sortScore(my_map,lines):
     global returnJson
-    sorted_list = sorted(my_map.items(), key=lambda x: x[1])
-    for item in sorted_list:
-        word = {
-            "sentence"  : item[0],
-            "score"     : item[1]
-        }
-        returnJson.append(word)
+    returnlines = []
+    sorted_list = sorted(my_map.items(), key=lambda x: x[1], reverse=True)
+    
+    for number,item in enumerate(sorted_list):
+        # 加入得分筛选
+        if(item[1]>4 and item[1]<8):
+            word = {
+                "sentence"  : item[0],
+                "score"     : item[1]
+            }
+            returnJson.append(word)
+            returnlines.append(lines[number])
         print(item[0])
+
+    return returnlines
 
 
 def create_score():
@@ -64,10 +83,11 @@ def create_score():
             setence_socre_ls.append(score)
             map[sentence] = score
 
-        sortScore(map)
+        lines = sortScore(map,lines)
 
+    writeToConll(lines)
+    writeToScoreJson(returnJson)
 
-    writeToConll(returnJson)
     print("finish")
     
 
@@ -78,7 +98,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# sentence = 'Xinhua News Agency , Canberra , January 13 , by Xinhua News Agency , in Manila , by reporter Changyi Xiong'
-# score = bert_ppl_original(sentence)
-# print(score)
