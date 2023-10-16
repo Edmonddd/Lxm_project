@@ -2,7 +2,22 @@ import random
 import json
 from tqdm import tqdm
 
+'''
+    create_score_to1()
+        得到一个总的得分文件。
+
+    create_score_to3()
+        得到三个总的得分文件，按比例划分。
+
+    create_score_fromExist_to3()
+        得到三个总的得分文件，按比例划分，但是不需要导入评分函数，直接从create_score_to1()得到的得分文件按比例划分。
+
+'''
+
+
+
 # 定义全局变量
+# 比例输出的路径
 outputScoreFile_first = './output/first/scorereuslt.json'
 outputFile_first = './output/first/deleteOscorereuslt.conll'
 
@@ -12,11 +27,19 @@ outputFile_middle = './output/middle/deleteOscorereuslt.conll'
 outputScoreFile_last = './output/last/scorereuslt.json'
 outputFile_last = './output/last/deleteOscorereuslt.conll'
 
-FilePath = './output/deleteO.conll'
+FilePath = './output/step_1/deleteO.conll'
+
+# 总分导入路径
+FileResultPath = './output/first/scorereuslt.json'
+FileResultConllPath = './output/first/deleteOscorereuslt.conll'
+
+# 总分输出路径
+OutputScoreFile = './output/first/scorereuslt.json'
+OutputFile = './output/first/deleteOscorereuslt.conll'
 
 #比例
-firstPartRatio = 0.2
-lastPartRatio = 0.8
+FirstPartRatio = 0.2
+LastPartRatio = 0.8
 
 # 随机得分，模拟 bert_ppl_original 函数
 def random_score():
@@ -72,18 +95,18 @@ def convertToJson(sorted_list,map_2):
     return returnlines,returnJson
 
 # 评分排序
-def sortScore(my_map):
+def sortScoreTo3(my_map):
     global returnJson
     returnlines = []
     sorted_list = sorted(my_map.items(), key=lambda x: x[1], reverse=True)
 
     #比例筛选 
     # 前面
-    firstPart_num_elements = int(len(sorted_list) * firstPartRatio)
+    firstPart_num_elements = int(len(sorted_list) * FirstPartRatio)
     firstPart_filtered_list = sorted_list[:firstPart_num_elements]
 
     #后面
-    lastPart_num_elements = int(len(sorted_list) * lastPartRatio)
+    lastPart_num_elements = int(len(sorted_list) * LastPartRatio)
     lsatPart_filtered_list = sorted_list[lastPart_num_elements:]
 
     #中间
@@ -92,7 +115,14 @@ def sortScore(my_map):
     return firstPart_filtered_list,middlePart_filtered_list,lsatPart_filtered_list
 
 
-def create_score():
+def sortScoreTo1(my_map):
+    global returnJson
+    returnlines = []
+    sorted_list = sorted(my_map.items(), key=lambda x: x[1], reverse=True)
+    return sorted_list
+
+
+def create_score_to3():
     setence_socre_ls = []
     sentence = ''
     sentence_all = []
@@ -117,7 +147,7 @@ def create_score():
             map_2[sentence] = i
             map_1[sentence] = score
 
-    firstPart_filtered_list,middlePart_filtered_list,lsatPart_filtered_list = sortScore(map_1)
+    firstPart_filtered_list,middlePart_filtered_list,lsatPart_filtered_list = sortScoreTo3(map_1)
 
     #first part
     lines,json = convertToJson(firstPart_filtered_list,map_2)
@@ -137,13 +167,97 @@ def create_score():
     writeToScoreJson(outputScoreFile_last,json)
     print("last part 一共有:",len(lines))
 
-
     print("比分筛选finish")
     
 
 
+def create_score_to1():
+    setence_socre_ls = []
+    sentence = ''
+    sentence_all = []
+    #sent to score
+    map_1 = {}
+    #sent to sent_before
+    map_2 = {}
+
+    with open(FilePath, 'r') as file:
+        lines = file.readlines()
+        lines = splitTokens(lines)
+        for i in tqdm(lines):
+            sentence = ''
+            score = 0
+            for j in i:
+                sentence += (j.split('\t')[0]) + (' ')
+            # print(sentence)
+            sentence_all.append(sentence)
+            score = random_score()
+            setence_socre_ls.append(score)
+
+            map_2[sentence] = i
+            map_1[sentence] = score
+
+    resultlist = sortScoreTo1(map_1)
+
+    #first part
+    lines,json = convertToJson(resultlist,map_2)
+    writeToConll(outputFile_first,lines)
+    writeToScoreJson(outputScoreFile_first,json)
+    print("frist part 一共有:",len(lines))
+
+    print("比分筛选finish")
+
+
+
+def create_score_fromExist_to3():
+    setence_socre_ls = []
+    sentence = ''
+    sentence_all = []
+    #sent to score
+    map_1 = {}
+    #sent to sent_before
+    map_2 = {}
+
+    with open(FileResultPath, 'r') as file:
+        data = json.load(file)
+        for line in data:
+            map_1[line['sentence']]=line['score']
+
+    with open(FileResultConllPath, 'r') as file:
+        lines = file.readlines()
+        lines = splitTokens(lines)
+        for i in lines:
+            sentence = ''
+            for j in i:
+                sentence += (j.split('\t')[0]) + (' ')
+            map_2[sentence] = i
+
+    firstPart_filtered_list,middlePart_filtered_list,lsatPart_filtered_list = sortScoreTo3(map_1)
+
+    #first part
+    lines,jsonr = convertToJson(firstPart_filtered_list,map_2)
+    writeToConll(outputFile_first,lines)
+    writeToScoreJson(outputScoreFile_first,jsonr)
+    print("frist part 一共有:",len(lines))
+
+    #middle part
+    lines,jsonr = convertToJson(middlePart_filtered_list,map_2)
+    writeToConll(outputFile_middle,lines)
+    writeToScoreJson(outputScoreFile_middle,jsonr)
+    print("middle part 一共有:",len(lines))
+
+    #middle part
+    lines,jsonr = convertToJson(lsatPart_filtered_list,map_2)
+    writeToConll(outputFile_last,lines)
+    writeToScoreJson(outputScoreFile_last,jsonr)
+    print("last part 一共有:",len(lines))
+
+    print("比分筛选finish")
+
+    
 def main():
-    create_score()
+    # create_score_to1()
+    # create_score_to3()
+    create_score_fromExist_to3()
 
 
 if __name__ == "__main__":
